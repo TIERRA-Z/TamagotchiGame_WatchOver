@@ -172,11 +172,11 @@ public class TamagotchiGame {
     //Cute little borders for organizational purposes:
 		System.out.println("<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3\n");
 		
-		System.out.println("Hi " + userName + ", Welcome to the WATCHOVER pet shop!");
-		System.out.println("My name is Tee and I work here! Let me tell you a little about this quirky place. We offer a variety of animals to choose from at no cost. \nThese are not just special animals "
-				+ "however, but animals that will be train to grow up one day and become superheroes...or supervillians. We, haha, have had quite of villians lately. "
+		System.out.println("Hi " + userName + ", Welcome to the WATCHOVER pet shop!\n");
+		System.out.println("My name is Tee and I work here! Let me tell you a little bit about this quirky place. We offer a variety of animals to choose from at no cost. \n\nThese are not just special animals "
+				+ "however, but animals that will be train to grow up one day and become superheroes...or supervillians. \nWe, haha, have had quite of villians lately. "
 				+ "\nAnyways- we are looking for responsible individuals that will do their best to nurture these animals as they begin growing and discovering their abilities. "
-				+ "This responsibility is not for the faint of heart, these sweetiepies can be a handful.");
+				+ "\nThis responsibility is not for the faint of heart, these sweetiepies can be a handful.");
 		
 		//Array for pet list
 		String[] petList = new String [6];
@@ -214,8 +214,68 @@ public class TamagotchiGame {
         	System.exit(EXIT);	
     	} //end If Statement
     		
+    	// String Variable chosenPet that gets the user pet based on the pet's placement in the array
     	 String chosenPet = petList[userChoice-1];
-    	 System.out.println("You have chosen " + chosenPet + " *ARF ARF ARF*\n");
+    	 
+    	 System.out.println("You have chosen a " + chosenPet + "!\n");
+    	 
+    	 System.out.println("Pwease name your " + chosenPet + ": \n");
+         String petName = input.nextLine();
+         
+         System.out.println("Your" + chosenPet + "'s name is " + petName + ". Congratulations!");
+         System.out.println("Every pet has stats that contribute to their overall happiness. \nIf you take care of your pet, the stats will remain high and their happiness will max out.");
+         System.out.println("However, if you neglect your pet, their happiness will decrease until"
+         		+ " you ultimately face their wrath. \nPlease take care of " + petName + " and good luck!");
+         
+ 		System.out.println("\n<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3===<3\n");
+
+      //Array that will store unique stats that strictly apply to if the chosenPet = Dog:
+        String[] dogStats = new String [6];
+ 		dogStats[0] = "Happiness";
+ 	    dogStats[1] = "Hunger";
+ 	    dogStats[2] = "Sleep";
+ 	    dogStats[3] = "Clean";
+ 	    dogStats[4] = "Nurture";
+ 	    dogStats[5] = "Fun";
+ 	    
+ 	    int dogLevels [] = new int[6];
+ 	    dogLevels[0] = 75;
+	    dogLevels[1] = 15;
+	    dogLevels[2] = 20;
+	    dogLevels[3] = 15;
+	    dogLevels[4] = 17;
+	    dogLevels[5] = 8;
+	    
+	   //Prints starting stats and levels for 
+        System.out.println("Here is " + petName + "'s current stats and overall mood: \n");
+        for (int i = 0; i < 6; i++) {
+            System.out.println(dogStats[i] + ": " + dogLevels[i] + "\n");
+        }
+
+        if(dogLevels[0]==100 || dogLevels[0] > 100) {
+	    	System.out.println("Happiness all maxed out. It looks like " + petName + "is in pristine, top-notch shape. You're a natural at this!");
+	    	String mood = "Happy";
+	    	System.out.print(mood);
+	    }
+	    
+	    if(dogLevels[1]==10 || dogLevels[2]==10 || dogLevels[3]==10 || dogLevels[4]==10 || dogLevels[5]==10) {
+	    	System.out.println("It looks like " + petName + "needs your attention. Try looking at their stats to determine what " + petName +  "needs.");
+	    }
+	    
+	    if(dogLevels[1]==5 || dogLevels[2]==5 || dogLevels[3]==5 || dogLevels[4]==5 || dogLevels[5]==5) {
+	    	System.out.println("It looks like " + petName + "needs your attention. Try looking at their stats to determine what " + petName +  "needs.");
+	    }
+	    
+	    if(dogLevels[1]==0 || dogLevels[2]==0 || dogLevels[3]==0 || dogLevels[4]==0 || dogLevels[5]==0) {
+	    	System.out.println(petName + "needs your attention. Try looking at their stats to determine what " + petName +  "needs.");
+	    }
+	    
+	    //If Statement if ALL dogLevels are 0- GAME OVER
+	    if(dogLevels[1]==0 && dogLevels[2]==0 && dogLevels[3]==0 && dogLevels[4]==0 && dogLevels[5]==0) {
+	    	System.out.println(petName + "has been neglected. " + petName + "'s eyes turn red while you begin to levitate in the air. Game over! ");
+	    	System.exit(EXIT);
+	    }
+
     	
     	//Switch for user's choice of pet (Dog, Cat, Hamster, Dragon, Black Void, Birb):
    /* 	switch (userChoice) {
