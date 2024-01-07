@@ -12,6 +12,7 @@
 	import java.time.format.DateTimeFormatter;  
 	import java.time.LocalDateTime;
 	import java.io.*;
+    import java.util.Random;
 
 //Tried to be ambitious and use an enum to store the pet types and modified stats (made my own data type):
 enum petStats {
@@ -123,6 +124,9 @@ class Pet {
     private int funDecay;
     private int nurtureDecay;
     private Scanner asciiArt;
+   final private int playerLevelMax = 50;
+   private int level;
+   
 
    
 
@@ -176,6 +180,7 @@ class Pet {
     		sleepiness -= 2 * sleepinessDecay;
     		fun -= 2* funDecay;
     		nurture -= 2* nurtureDecay;
+    		level++;
     		
     		//Assigns new time cycle:
     		timeCycletemp = timeCycle; 
@@ -255,6 +260,55 @@ class Pet {
     	System.out.println("You take a good look at your buddy, " + name + ". They look back at you, probably.");
     	timeCycle += 5;
     }
+    
+    public void playerLevel() {
+        if (happiness >= 75 && level < playerLevelMax) {
+        	 level++;
+         System.out.println("Congratulations! You have reached Level " + level);
+          
+            // Initialized at 0 while max is 50
+            if (level == 5) {
+                System.out.println("You have now unlocked the Dress Up option under the Play Action.");
+                System.out.println("The more your player level increases, the more outfits you can unlock.");
+            }
+
+            if (level >= playerLevelMax) {
+                level = playerLevelMax;
+                System.out.println("Congratulations! You have reached Level " + playerLevelMax + ", max level achieved!");
+            }
+        }
+    }
+     
+    	
+    public void dressUp() {
+        // Check if the player has reached the required level to unlock Dress Up
+    	  if (level >= 5) {
+              System.out.println("You can now dress up your character!");
+              // Implement the logic to choose outfits here
+              String[] petOutfits = {"Red Beret (common)", " Red Sunglasses (common)","Blue Sunglasses (common)", "Green Sunglasses (common)","Yellow Sunglasses (common)", "Purple Sunglasses (common)", "Golden Leash (uncommon)", "Flower Crown (common)", "24k crown (rare), Pearl Necklace (rare)"};
+              
+              String randomOutfit = getRandomOutfit(petOutfits);
+
+              // Print result
+              System.out.println(randomOutfit + " has been added to your wardrobe. Every time you level up, you will receive an outfit. Outfits range from common to rare!");
+              
+             // String[] Wardrobe = {};
+          } else {
+              System.out.println("\nYou need to reach Level 5 to unlock the Dress Up option.");
+          }
+    }
+
+    //get outfits
+    private String getRandomOutfit(String[] outfits) {
+    	 if (outfits == null || outfits.length == 0) {
+             return null;
+         }
+    	
+        Random random = new Random();
+        int randomIndex = random.nextInt(outfits.length);
+        return outfits[randomIndex];
+    }
+
     
 //Method Displays Current Stats:
     public void displayStats() {
@@ -357,7 +411,7 @@ public class TamagotchiExample {
         	
         //The One and Only:
         	System.out.println("\nProgrammed by: Tierra Doughty (Tee)\n");
-        	
+        	        	
         //Dedication to my helper <3
         	System.out.println("Dedicated to J.L.\n");
 
@@ -484,6 +538,7 @@ public class TamagotchiExample {
                         break;
                     case 5:
                         selectedPet.play();
+                        selectedPet.dressUp();
                         break;
                     case 6:
                         selectedPet.displayStats();
@@ -510,6 +565,7 @@ public class TamagotchiExample {
                         System.out.println("Invalid action. Please choose a valid action.");
                 } 
                 selectedPet.checkStats();
+                selectedPet.playerLevel();
                 selectedPet.statDecay();
             }
         } else {
